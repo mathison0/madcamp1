@@ -1,5 +1,6 @@
 package com.example.madcamp1.ui.tab1
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,8 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp1.R
 import com.example.madcamp1.data.ProblemListItem
+import com.example.madcamp1.databinding.ItemHeaderBinding
+import com.example.madcamp1.databinding.ItemProblemBinding
 
-class ProblemListAdapter(private val items: List<ProblemListItem>) :
+class ProblemListAdapter(
+    private var items: List<ProblemListItem>,
+    private val onHeaderClick: ((ProblemListItem.Header) -> Unit)? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -25,36 +30,44 @@ class ProblemListAdapter(private val items: List<ProblemListItem>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == TYPE_HEADER) {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_header, parent, false)
-            HeaderViewHolder(view)
+            val binding = ItemHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            HeaderViewHolder(binding)
         } else {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_problem, parent, false)
-            ItemViewHolder(view)
+            val binding = ItemProblemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemViewHolder(binding)
         }
     }
 
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        Log.d("RecyclerView", "onBindViewHolder position=$position, item=${items[position]}")
         when (val item = items[position]) {
             is ProblemListItem.Header -> (holder as HeaderViewHolder).bind(item)
             is ProblemListItem.Item -> (holder as ItemViewHolder).bind(item)
         }
     }
 
-    class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textView: TextView = itemView.findViewById(R.id.text_header)
+    fun updateList(newList: List<ProblemListItem>) {
+        items = newList
+        notifyDataSetChanged()
+    }
+
+
+    inner class HeaderViewHolder(private val binding: ItemHeaderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(header: ProblemListItem.Header) {
-            textView.text = header.title
+            binding.textViewHeader.text = header.title
+            binding.root.setOnClickListener {
+                onHeaderClick?.invoke(header)  // 클릭 시 콜백 호출
+            }
         }
     }
 
-    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textView: TextView = itemView.findViewById(R.id.text_problem)
+    class ItemViewHolder(private val binding: ItemProblemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProblemListItem.Item) {
-            textView.text = item.name
+            binding.textProblem.text = item.name
         }
     }
 }
