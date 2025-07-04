@@ -1,4 +1,7 @@
 package com.example.madcamp1.data
 
-class Album {
-}
+data class Album(
+    val id: Int,
+    val title: String,
+    val images: List<Int>
+)

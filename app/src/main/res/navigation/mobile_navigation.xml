@@ -21,13 +21,32 @@
         android:id="@+id/navigation_tab2"
         android:name="com.example.madcamp1.ui.tab2.Tab2Fragment"
         android:label="@string/title_tab2"
-        tools:layout="@layout/fragment_tab2" />
+        tools:layout="@layout/fragment_tab2" >
+
+        <!-- ✅ Tab2 -> ProblemDetail 이동 -->
+        <action
+            android:id="@+id/action_tab2_to_problemDetail"
+            app:destination="@id/problemDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_tab3"
         android:name="com.example.madcamp1.ui.tab3.Tab3Fragment"
         android:label="@string/title_tab3"
         tools:layout="@layout/fragment_tab3" />
+
+    <!-- ✅ ProblemDetailFragment 정의 + IntArray argument -->
+    <fragment
+        android:id="@+id/problemDetailFragment"
+        android:name="com.example.madcamp1.ui.tab2.ProblemDetailFragment"
+        android:label="문제 상세 화면"
+        tools:layout="@layout/fragment_problem_detail">
+
+        <argument
+            android:name="images"
+            app:argType="integer[]"
+            app:nullable="false" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_detail"
