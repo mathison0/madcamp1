@@ -3,4 +3,10 @@
     <string name="title_tab1">문제집</string>
     <string name="title_tab2">풀이</string>
     <string name="title_tab3">스트릭</string>
+    <string-array name="search_filter_options">
+        <item>문제</item>
+        <item>대회</item>
+    </string-array>
 </resources>
+
+
