@@ -1,5 +1,7 @@
 package com.example.madcamp1.ui.tab1
 
+import com.example.madcamp1.ui.tab1.Tab1FragmentDirections
+import androidx.navigation.fragment.findNavController
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,7 @@ import android.text.Editable
 import android.util.Log
 import android.widget.ArrayAdapter
 import com.example.madcamp1.R
+import com.example.madcamp1.ui.detail.DetailFragment
 
 
 class Tab1Fragment : Fragment() {
@@ -64,9 +67,17 @@ class Tab1Fragment : Fragment() {
         fullList = loadProblemsFromJson(requireContext())
 
         // 1. 어댑터 설정 시 클릭 리스너 전달
-        adapter = ProblemListAdapter(fullList) { header ->
-            showProblemsUnderHeader(header)
-        }
+        adapter = ProblemListAdapter(
+            fullList,
+            onProblemClickListener = { item ->
+                val action = Tab1FragmentDirections.actionNavigationTab1ToNavigationDetail(item.name)
+                findNavController().navigate(action)
+            },
+            onHeaderClick = { header ->
+                showProblemsUnderHeader(header)
+            }
+        )
+
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
 

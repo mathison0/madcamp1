@@ -9,7 +9,13 @@
         android:id="@+id/navigation_tab1"
         android:name="com.example.madcamp1.ui.tab1.Tab1Fragment"
         android:label="@string/title_tab1"
-        tools:layout="@layout/fragment_tab1" />
+        tools:layout="@layout/fragment_tab1">
+
+        <action
+            android:id="@+id/action_navigation_tab1_to_navigation_detail"
+            app:destination="@id/navigation_detail" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_tab2"
@@ -22,4 +28,14 @@
         android:name="com.example.madcamp1.ui.tab3.Tab3Fragment"
         android:label="@string/title_tab3"
         tools:layout="@layout/fragment_tab3" />
+
+    <fragment
+        android:id="@+id/navigation_detail"
+        android:name="com.example.madcamp1.ui.detail.DetailFragment"
+        android:label="Detail">
+        <argument
+            android:name="problem_name"
+            app:argType="string" />
+    </fragment>
+
 </navigation>

@@ -1,5 +1,6 @@
 package com.example.madcamp1.ui.tab1
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,12 @@ import com.example.madcamp1.R
 import com.example.madcamp1.data.ProblemListItem
 import com.example.madcamp1.databinding.ItemHeaderBinding
 import com.example.madcamp1.databinding.ItemProblemBinding
+import com.example.madcamp1.ui.detail.DetailActivity
 
 class ProblemListAdapter(
     private var items: List<ProblemListItem>,
-    private val onHeaderClick: ((ProblemListItem.Header) -> Unit)? = null) :
+    private val onHeaderClick: ((ProblemListItem.Header) -> Unit)? = null,
+    private val onProblemClickListener: ((ProblemListItem.Item) -> Unit)? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -64,10 +67,15 @@ class ProblemListAdapter(
         }
     }
 
-    class ItemViewHolder(private val binding: ItemProblemBinding) :
+    inner class ItemViewHolder(private val binding: ItemProblemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProblemListItem.Item) {
             binding.textProblem.text = item.name
+            binding.root.setOnClickListener {
+                onProblemClickListener?.invoke(item)
+            }
         }
     }
+
+
 }
