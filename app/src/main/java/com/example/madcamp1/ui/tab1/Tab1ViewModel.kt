@@ -1,13 +1,13 @@
-package com.example.madcamp1.ui.dashboard
+package com.example.madcamp1.ui.tab1
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class Tab1ViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "문제집"
     }
     val text: LiveData<String> = _text
 }
