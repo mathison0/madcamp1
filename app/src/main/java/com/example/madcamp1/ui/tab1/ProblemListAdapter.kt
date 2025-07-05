@@ -1,17 +1,12 @@
 package com.example.madcamp1.ui.tab1
 
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.madcamp1.R
 import com.example.madcamp1.data.ProblemListItem
 import com.example.madcamp1.databinding.ItemHeaderBinding
 import com.example.madcamp1.databinding.ItemProblemBinding
-import com.example.madcamp1.ui.detail.DetailActivity
 
 class ProblemListAdapter(
     private var items: List<ProblemListItem>,

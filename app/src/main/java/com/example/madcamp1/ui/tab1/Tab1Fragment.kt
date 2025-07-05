@@ -1,14 +1,11 @@
 package com.example.madcamp1.ui.tab1
 
-import com.example.madcamp1.ui.tab1.Tab1FragmentDirections
 import androidx.navigation.fragment.findNavController
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.madcamp1.databinding.FragmentTab1Binding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp1.data.ProblemListItem
@@ -21,7 +18,6 @@ import android.text.Editable
 import android.util.Log
 import android.widget.ArrayAdapter
 import com.example.madcamp1.R
-import com.example.madcamp1.ui.detail.DetailFragment
 
 
 class Tab1Fragment : Fragment() {
@@ -57,8 +53,6 @@ class Tab1Fragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val tab1ViewModel =
-            ViewModelProvider(this).get(Tab1ViewModel::class.java)
 
         _binding = FragmentTab1Binding.inflate(inflater, container, false)
         val root: View = binding.root
