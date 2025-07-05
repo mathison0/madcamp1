@@ -1,9 +1,11 @@
 package com.example.madcamp1.ui.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.madcamp1.databinding.FragmentDetailBinding
 
@@ -17,9 +19,26 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        Log.d("DetailFragment", "binding.textViewTitle: ${binding.textViewTitle}")
 
-        val problemName = arguments?.getString("problem_name")
+        val problemName = DetailFragmentArgs.fromBundle(requireArguments()).problemName
+        Log.d("DetailFragment", "현재 전달받은 문제 이름: $problemName")
+
         binding.textViewTitle.text = problemName ?: "문제 정보 없음"
+
+        binding.buttonSolution.setOnClickListener {
+            Toast.makeText(context, "풀이로 이동합니다", Toast.LENGTH_SHORT).show()
+
+        }
+
+        binding.checkBoxSolved.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                Toast.makeText(context, "풀었음", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "체크 해제", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         return binding.root
     }
