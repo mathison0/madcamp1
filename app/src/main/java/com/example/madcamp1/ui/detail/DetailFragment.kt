@@ -5,13 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import com.github.chrisbanes.photoview.PhotoView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.madcamp1.R
 import com.example.madcamp1.databinding.FragmentDetailBinding
 import androidx.navigation.fragment.findNavController
+import android.widget.ImageView
+
 
 
 class DetailFragment : Fragment() {
@@ -83,17 +85,32 @@ class DetailFragment : Fragment() {
             }
         }
 
-        // 이미지 뷰를 imageContainer에 추가
+//        // 이미지 뷰를 imageContainer에 추가
+//        for (resId in imageResIds) {
+//            val imageView = ImageView(requireContext()).apply {
+//                layoutParams = LinearLayout.LayoutParams(
+//                    LinearLayout.LayoutParams.MATCH_PARENT, 600
+//                ).apply {
+//                    setMargins(0, 16, 0, 16)
+//                }
+//                scaleType = ImageView.ScaleType.FIT_CENTER
+//                setImageResource(resId)
+//            }
+//            binding.imageContainer.addView(imageView)
+//        }
+
         for (resId in imageResIds) {
-            val imageView = ImageView(requireContext()).apply {
+            val imageView = PhotoView(requireContext()).apply {
                 layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, 600
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
                 ).apply {
                     setMargins(0, 16, 0, 16)
                 }
+                adjustViewBounds = true
                 scaleType = ImageView.ScaleType.FIT_CENTER
-                setImageResource(resId)
             }
+            imageView.setImageResource(resId)
             binding.imageContainer.addView(imageView)
         }
 
