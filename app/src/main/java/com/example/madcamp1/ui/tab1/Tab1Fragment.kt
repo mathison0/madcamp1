@@ -17,6 +17,7 @@ import android.text.TextWatcher
 import android.text.Editable
 import android.util.Log
 import android.widget.ArrayAdapter
+import androidx.core.view.ViewCompat
 import com.example.madcamp1.R
 
 
@@ -122,6 +123,13 @@ class Tab1Fragment : Fragment() {
 
         adapter.updateList(fullList)
         Log.d("Tab1Fragment", "초기 리스트 크기: ${fullList.size}")
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
+            val topInset = insets.systemGestureInsets.top
+            view.setPadding(0, topInset, 0, 0)
+            insets
+        }
+
 
         return root
     }
