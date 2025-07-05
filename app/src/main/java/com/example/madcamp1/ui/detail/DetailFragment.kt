@@ -1,5 +1,6 @@
 package com.example.madcamp1.ui.detail
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +10,6 @@ import com.github.chrisbanes.photoview.PhotoView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.madcamp1.R
 import com.example.madcamp1.databinding.FragmentDetailBinding
 import androidx.navigation.fragment.findNavController
 import android.widget.ImageView
@@ -40,11 +40,24 @@ class DetailFragment : Fragment() {
 
         }
 
+
+        // 1. SharedPreferences에서 저장된 체크박스 상태 불러오기
+        val prefs = requireContext().getSharedPreferences("checkbox_prefs", Context.MODE_PRIVATE)
+        val key = "isChecked_$problemId"
+
+//        prefs.edit().remove(key).apply() // ← 문제 ID별 체크 상태 초기화
+//        Log.d("DetailFragment", "초기화 완료: $key")
+
+        val isChecked = prefs.getBoolean(key, false)
+        // 2. 체크박스 상태 설정
+        binding.checkBoxSolved.isChecked = isChecked
+        // 3. 이미 체크되어 있으면 다시 건드릴 수 없도록 비활성화
+        binding.checkBoxSolved.isEnabled = !isChecked
+
         binding.checkBoxSolved.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                Toast.makeText(context, "풀었음", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, "체크 해제", Toast.LENGTH_SHORT).show()
+                prefs.edit().putBoolean(key, true).apply()
+                binding.checkBoxSolved.isEnabled = false
             }
         }
 
@@ -84,20 +97,6 @@ class DetailFragment : Fragment() {
                 break
             }
         }
-
-//        // 이미지 뷰를 imageContainer에 추가
-//        for (resId in imageResIds) {
-//            val imageView = ImageView(requireContext()).apply {
-//                layoutParams = LinearLayout.LayoutParams(
-//                    LinearLayout.LayoutParams.MATCH_PARENT, 600
-//                ).apply {
-//                    setMargins(0, 16, 0, 16)
-//                }
-//                scaleType = ImageView.ScaleType.FIT_CENTER
-//                setImageResource(resId)
-//            }
-//            binding.imageContainer.addView(imageView)
-//        }
 
         for (resId in imageResIds) {
             val imageView = PhotoView(requireContext()).apply {
