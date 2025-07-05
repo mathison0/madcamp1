@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.example.madcamp1.databinding.FragmentProblemDetailBinding
 
 class ProblemDetailFragment : Fragment() {
@@ -30,7 +31,7 @@ class ProblemDetailFragment : Fragment() {
                 ).apply { setMargins(0, 16, 0, 16) }
                 scaleType = ImageView.ScaleType.FIT_CENTER
             }
-            Glide.with(this).load(resId).into(imageView)
+            imageView.load(resId)
             binding.imageContainer.addView(imageView)
         }
     }

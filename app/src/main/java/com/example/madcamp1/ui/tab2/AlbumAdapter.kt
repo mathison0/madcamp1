@@ -3,7 +3,8 @@ package com.example.madcamp1.ui.tab2
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.example.madcamp1.databinding.ItemAlbumBinding
 import com.example.madcamp1.data.Album
 
@@ -16,9 +17,7 @@ class AlbumAdapter(
         fun bind(album: Album) {
             val thumbnail = album.images.firstOrNull()
             if (thumbnail != null) {
-                Glide.with(binding.root.context)
-                    .load(thumbnail)
-                    .into(binding.imageView)
+                binding.imageView.load(thumbnail)
             }
             binding.titleText.text = album.title
             binding.root.setOnClickListener { onClick(album) }
