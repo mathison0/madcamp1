@@ -42,7 +42,7 @@ class Tab1Fragment : Fragment() {
         return rawList.map {
             when (it.type) {
                 "header" -> ProblemListItem.Header(it.title ?: "")
-                "item" -> ProblemListItem.Item(it.name ?: "")
+                "item" -> ProblemListItem.Item(it.name ?: "", id = it.id ?: 0)
                 else -> throw IllegalArgumentException("Unknown type: ${it.type}")
             }
         }
@@ -64,7 +64,7 @@ class Tab1Fragment : Fragment() {
         adapter = ProblemListAdapter(
             fullList,
             onProblemClickListener = { item ->
-                val action = Tab1FragmentDirections.actionNavigationTab1ToNavigationDetail(item.name)
+                val action = Tab1FragmentDirections.actionNavigationTab1ToNavigationDetail(item.name, item.id)
                 findNavController().navigate(action)
             },
             onHeaderClick = { header ->

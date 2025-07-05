@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.madcamp1.R
 import com.example.madcamp1.databinding.FragmentDetailBinding
+import androidx.navigation.fragment.findNavController
+
 
 class DetailFragment : Fragment() {
 
@@ -38,6 +41,32 @@ class DetailFragment : Fragment() {
                 Toast.makeText(context, "체크 해제", Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.buttonSolution.setOnClickListener {
+            val problemId = DetailFragmentArgs.fromBundle(requireArguments()).problemId
+
+            val imageResIds = mutableListOf<Int>()
+            var index = 1
+
+            while (true) {
+                val imageName = "img_${problemId}_${index}"
+                val resId = resources.getIdentifier(imageName, "drawable", requireContext().packageName)
+
+                if (resId != 0) {
+                    imageResIds.add(resId)
+                    index++
+                } else {
+                    break // 더 이상 이미지가 없으면 종료
+                }
+            }
+
+// 이동
+            val action = DetailFragmentDirections.actionDetailToProblemDetail(imageResIds.toIntArray())
+            findNavController().navigate(action)
+
+
+        }
+
 
 
         return binding.root

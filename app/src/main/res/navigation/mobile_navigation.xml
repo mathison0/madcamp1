@@ -56,6 +56,15 @@
         <argument
             android:name="problemName"
             app:argType="string" />
+        <argument
+            android:name="problemId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_detail_to_problemDetail"
+            app:destination="@id/problemDetailFragment" />
     </fragment>
+
+
 
 </navigation>
