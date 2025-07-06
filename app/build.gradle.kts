@@ -67,7 +67,7 @@ dependencies {
     implementation("com.github.chrisbanes:PhotoView:2.3.0")
     implementation("com.github.kizitonwose:CalendarView:2.4.1")
     implementation(libs.places)
-
+    
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
