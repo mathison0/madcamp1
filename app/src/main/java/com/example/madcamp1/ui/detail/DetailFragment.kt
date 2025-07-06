@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.example.madcamp1.databinding.FragmentDetailBinding
 import androidx.navigation.fragment.findNavController
 import android.widget.ImageView
+import java.time.LocalDate
 
 
 
@@ -58,6 +59,21 @@ class DetailFragment : Fragment() {
             if (isChecked) {
                 prefs.edit().putBoolean(key, true).apply()
                 binding.checkBoxSolved.isEnabled = false
+
+                // 오늘 날짜를 저장
+                val today = LocalDate.now() // 예: 2025-07-06
+                val dateSetKey = "checked_date_list"
+
+                // 기존 저장된 날짜 리스트 가져오기
+                val savedDateStrings = prefs.getStringSet(dateSetKey, mutableSetOf())?.toMutableSet() ?: mutableSetOf()
+
+                // 오늘 날짜 추가 (중복 방지)
+                savedDateStrings.add(today.toString())  // LocalDate → "yyyy-MM-dd" 문자열로 변환
+
+                // 다시 저장
+                prefs.edit().putStringSet(dateSetKey, savedDateStrings).apply()
+
+                Log.d("DetailFragment", "체크한 날짜 저장됨: ${today}")
             }
         }
 

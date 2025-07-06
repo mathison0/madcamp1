@@ -64,7 +64,9 @@ dependencies {
     implementation("com.google.dagger:dagger-compiler:2.51.1")
     ksp("com.google.dagger:dagger-compiler:2.51.1")
     implementation("io.coil-kt:coil:2.4.0")
-    implementation ("com.github.chrisbanes:PhotoView:2.3.0")
+    implementation("com.github.chrisbanes:PhotoView:2.3.0")
+    implementation("com.github.kizitonwose:CalendarView:2.4.1")
+    implementation(libs.places)
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
