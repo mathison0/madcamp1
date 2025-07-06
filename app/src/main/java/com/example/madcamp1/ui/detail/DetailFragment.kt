@@ -14,6 +14,7 @@ import com.example.madcamp1.databinding.FragmentDetailBinding
 import androidx.navigation.fragment.findNavController
 import android.widget.ImageView
 import java.time.LocalDate
+import org.json.JSONArray
 
 
 
@@ -46,8 +47,20 @@ class DetailFragment : Fragment() {
         val prefs = requireContext().getSharedPreferences("checkbox_prefs", Context.MODE_PRIVATE)
         val key = "isChecked_$problemId"
 
-//        prefs.edit().remove(key).apply() // ← 문제 ID별 체크 상태 초기화
-//        Log.d("DetailFragment", "초기화 완료: $key")
+        val editor = prefs.edit()
+
+////       모든 isChecked_로 시작하는 키 제거
+//        for ((key, _) in prefs.all) {
+//            if (key.startsWith("isChecked_")) {
+//                editor.remove(key)
+//            }
+//        }
+//
+////      날짜 리스트도 초기화 (JSONArray 버전)
+//        editor.putString("checked_date_list", "[]")
+//
+////      적용
+//        editor.apply()
 
         val isChecked = prefs.getBoolean(key, false)
         // 2. 체크박스 상태 설정
@@ -61,19 +74,16 @@ class DetailFragment : Fragment() {
                 binding.checkBoxSolved.isEnabled = false
 
                 // 오늘 날짜를 저장
-                val today = LocalDate.now() // 예: 2025-07-06
-                val dateSetKey = "checked_date_list"
+                val today = LocalDate.now().toString()
+                val jsonKey = "checked_date_list"
+                val existingJson = prefs.getString(jsonKey, "[]")
+                val jsonArray = JSONArray(existingJson)
 
-                // 기존 저장된 날짜 리스트 가져오기
-                val savedDateStrings = prefs.getStringSet(dateSetKey, mutableSetOf())?.toMutableSet() ?: mutableSetOf()
+                jsonArray.put(today)  // 중복 허용
 
-                // 오늘 날짜 추가 (중복 방지)
-                savedDateStrings.add(today.toString())  // LocalDate → "yyyy-MM-dd" 문자열로 변환
+                prefs.edit().putString(jsonKey, jsonArray.toString()).apply()
 
-                // 다시 저장
-                prefs.edit().putStringSet(dateSetKey, savedDateStrings).apply()
-
-                Log.d("DetailFragment", "체크한 날짜 저장됨: ${today}")
+                Log.d("DetailFragment", "체크한 날짜 저장됨 (JSONArray): $today")
             }
         }
 
