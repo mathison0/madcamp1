@@ -5,37 +5,57 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_tab1">
 
+    <!-- Tab1 Fragment -->
     <fragment
         android:id="@+id/navigation_tab1"
         android:name="com.example.madcamp1.ui.tab1.Tab1Fragment"
         android:label="@string/title_tab1"
         tools:layout="@layout/fragment_tab1">
-
         <action
             android:id="@+id/action_navigation_tab1_to_navigation_detail"
             app:destination="@id/navigation_detail" />
     </fragment>
 
-
+    <!-- Tab2 Fragment: Contest 목록 -->
     <fragment
         android:id="@+id/navigation_tab2"
         android:name="com.example.madcamp1.ui.tab2.Tab2Fragment"
         android:label="@string/title_tab2"
-        tools:layout="@layout/fragment_tab2" >
+        tools:layout="@layout/fragment_tab2">
 
-        <!-- ✅ Tab2 -> ProblemDetail 이동 -->
+        <!-- ✅ Tab2 → ContestDetailFragment -->
         <action
-            android:id="@+id/action_tab2_to_problemDetail"
-            app:destination="@id/problemDetailFragment" />
+            android:id="@+id/action_tab2_to_contestDetail"
+            app:destination="@id/contestDetailFragment" />
     </fragment>
 
+    <!-- Tab3 Fragment -->
     <fragment
         android:id="@+id/navigation_tab3"
         android:name="com.example.madcamp1.ui.tab3.Tab3Fragment"
         android:label="@string/title_tab3"
         tools:layout="@layout/fragment_tab3" />
 
-    <!-- ✅ ProblemDetailFragment 정의 + IntArray argument -->
+    <!-- ✅ ContestDetailFragment: Album 목록 -->
+    <fragment
+        android:id="@+id/contestDetailFragment"
+        android:name="com.example.madcamp1.ui.tab2.ContestDetailFragment"
+        android:label="대회 상세"
+        tools:layout="@layout/fragment_contest_detail">
+
+        <!-- argument: contestTitle -->
+        <argument
+            android:name="contestTitle"
+            app:argType="string"
+            app:nullable="false" />
+
+        <!-- ✅ ContestDetail → ProblemDetail -->
+        <action
+            android:id="@+id/action_contestDetail_to_problemDetail"
+            app:destination="@id/problemDetailFragment" />
+    </fragment>
+
+    <!-- ProblemDetailFragment: 이미지 뷰어 -->
     <fragment
         android:id="@+id/problemDetailFragment"
         android:name="com.example.madcamp1.ui.tab2.ProblemDetailFragment"
@@ -48,6 +68,7 @@
             app:nullable="false" />
     </fragment>
 
+    <!-- DetailFragment: Tab1 → 문제 상세 -->
     <fragment
         android:id="@+id/navigation_detail"
         android:name="com.example.madcamp1.ui.detail.DetailFragment"
@@ -64,7 +85,4 @@
             android:id="@+id/action_detail_to_problemDetail"
             app:destination="@id/problemDetailFragment" />
     </fragment>
-
-
-
 </navigation>

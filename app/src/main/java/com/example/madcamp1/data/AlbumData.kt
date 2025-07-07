@@ -23,7 +23,7 @@ object AlbumData {
         }
     }
 
-    private fun createAlbum(context: Context, number: Int): Album {
+    fun createAlbum(context: Context, number: Int): Album {
         val images = mutableListOf<Int>()
         var i = 1
         while (true) {

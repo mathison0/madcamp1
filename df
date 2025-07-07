@@ -1,0 +1,46 @@
+*   [33m74d45bf[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge branch 'main' of https://github.com/mathison0/madcamp1
+[31m|[m[32m\[m  
+[31m|[m * [33ma7a1f4c[m 체크되었을 때 날짜 표시
+[31m|[m * [33m56efed3[m 체크되었을 때 날짜 표시
+[31m|[m * [33md957f45[m 문제-잔디연결완료, 하단 버튼 클릭시 최초 fragment로 이동
+[31m|[m *   [33m2c3731a[m Merge branch 'main' of https://github.com/mathison0/madcamp1
+[31m|[m [33m|[m[34m\[m  
+[31m|[m * [34m|[m [33m96428f0[m "로컬 변경사항 저장"
+* [34m|[m [34m|[m [33m3cc4a8d[m 문제, 풀이 추가
+[34m|[m [34m|[m[34m/[m  
+[34m|[m[34m/[m[34m|[m   
+* [34m|[m [33mc37dec7[m 잔디 추가
+[34m|[m[34m/[m  
+* [33m5bc1699[m 체크박스 해제 못하도록, 페이지 이동해도 유지
+* [33mc9c2dab[m 문제 확대 기능 구현
+* [33mc9afd92[m 문제보기에서 풀이 이미지가 나오긴함..
+* [33m19abe27[m 풀이 연결 완료
+*   [33md9ef62f[m Merge branch 'main' of https://github.com/mathison0/madcamp1
+[35m|[m[36m\[m  
+[35m|[m * [33mee72fbe[m detail페이지 상단
+* [36m|[m [33mf3c6e85[m version compatibility s Please enter the commit message for your changes. Lines starting
+[36m|[m[36m/[m  
+* [33m6a2a168[m problem image added
+* [33mc194357[m navigation
+* [33mcd7474b[m image, xml added
+* [33m58ff23d[m idk
+* [33ma3a6c95[m tab2 implementation
+*   [33ma2350cb[m Merge branch 'main' of https://github.com/mathison0/madcamp1
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33md960a68[m 문제 디테일 페이지 연결
+[1;31m|[m * [33m1128061[m 문제집 검색 기능 구현
+[1;31m|[m [1;32m|[m * [33mccaf918[m[33m ([m[1;35mrefs/stash[m[33m)[m WIP on main: b1cfc33 Merge branch 'main' of https://github.com/mathison0/madcamp1
+[1;31m|[m [1;32m|[m[1;31m/[m[1;34m|[m 
+[1;31m|[m[1;31m/[m[1;32m|[m [1;34m|[m 
+[1;31m|[m [1;32m|[m * [33m268b926[m index on main: b1cfc33 Merge branch 'main' of https://github.com/mathison0/madcamp1
+[1;31m|[m [1;32m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;32m|[m   
+* [1;32m|[m [33mb1cfc33[m Merge branch 'main' of https://github.com/mathison0/madcamp1
+[1;35m|[m[1;32m\[m[1;32m|[m 
+[1;35m|[m * [33m6e7f4c3[m 화면 리스트 생성, tab1 데이터 json 형식으로 넣음
+[1;35m|[m * [33m4d97442[m 화면에 리스트 생성, tab1데이터 json 형식으로 넣음
+[1;35m|[m * [33md95b308[m 페이지 이름수정
+* [1;36m|[m [33m4f0ea34[m Merge branch 'main' of https://github.com/mathison0/madcamp1
+[31m|[m[1;36m\[m[1;36m|[m 
+[31m|[m * [33m2c667bc[m push
+* [33m2731a39[m Initial commit
