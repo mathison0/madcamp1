@@ -15,6 +15,7 @@ import com.example.madcamp1.databinding.CalendarDayLayoutBinding
 import com.example.madcamp1.databinding.FragmentTab3Binding
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
+import com.kizitonwose.calendar.core.OutDateStyle
 import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
 import com.kizitonwose.calendar.view.CalendarView
 import com.kizitonwose.calendar.view.ViewContainer
@@ -84,6 +85,7 @@ class Tab3Fragment : Fragment() {
                 // 헤더 뷰에 대한 초기화 코드 작성 (예: 요일 텍스트 설정)
             }
         }
+        calendarView.outDateStyle = OutDateStyle.EndOfGrid;
 
         val startMonth = currentMonth.minusMonths(100) // Adjust as needed
         val endMonth = currentMonth.plusMonths(100) // Adjust as needed
@@ -99,13 +101,13 @@ class Tab3Fragment : Fragment() {
         // 이전 달 버튼
         binding.btnPrevMonth.setOnClickListener {
             val prevMonth = currentMonth.minusMonths(1)
-            calendarView.scrollToMonth(prevMonth)
+            calendarView.smoothScrollToMonth(prevMonth)
         }
 
         // 다음 달 버튼
         binding.btnNextMonth.setOnClickListener {
             val nextMonth = currentMonth.plusMonths(1)
-            calendarView.scrollToMonth(nextMonth)
+            calendarView.smoothScrollToMonth(nextMonth)
         }
     }
 
