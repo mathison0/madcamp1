@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,8 @@ class Tab3Fragment : Fragment() {
 
     // 날짜별 문제 푼 개수 (더미 데이터)
     private val solvedCounts = mutableMapOf<LocalDate, Int>()
+    // 현재 월
+    private var currentMonth = YearMonth.now()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +48,7 @@ class Tab3Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.d("DebugTag", "onViewCreated")
         generateDummyData()
 
         val calendarView = binding.calendarView
@@ -81,7 +84,7 @@ class Tab3Fragment : Fragment() {
                 // 헤더 뷰에 대한 초기화 코드 작성 (예: 요일 텍스트 설정)
             }
         }
-        val currentMonth = YearMonth.now()
+
         val startMonth = currentMonth.minusMonths(100) // Adjust as needed
         val endMonth = currentMonth.plusMonths(100) // Adjust as needed
         val firstDayOfWeek = firstDayOfWeekFromLocale() // Available from the library
@@ -89,7 +92,20 @@ class Tab3Fragment : Fragment() {
         calendarView.scrollToMonth(currentMonth)
         binding.monthTitleText.text = "${currentMonth.year}년 ${currentMonth.monthValue}월"
         calendarView.monthScrollListener = { month ->
+            currentMonth = month.yearMonth
             binding.monthTitleText.text = "${month.yearMonth.year}년 ${month.yearMonth.monthValue}월"
+        }
+
+        // 이전 달 버튼
+        binding.btnPrevMonth.setOnClickListener {
+            val prevMonth = currentMonth.minusMonths(1)
+            calendarView.scrollToMonth(prevMonth)
+        }
+
+        // 다음 달 버튼
+        binding.btnNextMonth.setOnClickListener {
+            val nextMonth = currentMonth.plusMonths(1)
+            calendarView.scrollToMonth(nextMonth)
         }
     }
 

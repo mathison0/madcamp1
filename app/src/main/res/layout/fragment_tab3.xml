@@ -5,6 +5,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:gravity="center"> <!-- 전체를 수직 중앙 정렬 -->
 
         <LinearLayout
@@ -14,15 +16,40 @@
             android:gravity="center_horizontal"> <!-- 월 + 캘린더 묶음 -->
 
             <!-- 월 텍스트 -->
-            <TextView
-                android:id="@+id/monthTitleText"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2025년 7월"
-                android:textSize="20sp"
-                android:textColor="#000000"
-                android:paddingBottom="8dp"
-                android:gravity="center" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <ImageButton
+                    android:id="@+id/btnPrevMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_left"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="이전 달" />
+
+                <TextView
+                    android:id="@+id/monthTitleText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2025년 7월"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:textColor="#000000" />
+
+                <ImageButton
+                    android:id="@+id/btnNextMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_right"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="다음 달" />
+
+            </LinearLayout>
 
             <!-- 캘린더 뷰 -->
             <com.kizitonwose.calendar.view.CalendarView
