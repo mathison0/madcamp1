@@ -10,6 +10,7 @@
     tools:context=".ui.tab1.Tab1Fragment">
 
 
+
     <!-- 드롭다운 + 검색창 -->
     <LinearLayout
         android:id="@+id/search_bar_container"
@@ -56,6 +57,8 @@
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
             android:layout_marginTop="24dp"
+            android:paddingBottom="74dp"
+            android:clipToPadding="false"
             app:layout_constraintTop_toBottomOf="@id/search_bar_container"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -61,12 +61,6 @@
                         android:visibility="gone" />
 
                     <!-- 체크박스 -->
-                    <com.example.madcamp1.ui.custom.NoToggleCheckBox
-                        android:id="@+id/checkBoxSolved"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/place_details_attribution_color_gray"
-                        android:text="" />
 
 
                 </LinearLayout>
@@ -81,6 +75,14 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginStart="16dp"/>
 
+                <com.example.madcamp1.ui.custom.NoToggleCheckBox
+                    android:id="@+id/checkBoxSolved"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/place_details_attribution_color_gray"
+                    android:text=""
+                    tools:layout_editor_absoluteX="205dp"
+                    tools:layout_editor_absoluteY="40dp" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

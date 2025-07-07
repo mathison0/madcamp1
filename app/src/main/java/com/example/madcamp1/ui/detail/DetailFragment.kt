@@ -79,10 +79,16 @@ class DetailFragment : Fragment() {
                 if (isNowChecked) {
                     val today = LocalDate.now().toString()
 
+                    val dateListKey = "checked_date_list"
+                    val jsonString = prefs.getString(dateListKey, "[]")
+                    val jsonArray = JSONArray(jsonString)
+                    jsonArray.put(today)
+
                     // 저장
                     prefs.edit()
                         .putBoolean(key, true)
                         .putString(dateKey, today)
+                        .putString(dateListKey, jsonArray.toString())
                         .apply()
 
                     // UI 갱신
