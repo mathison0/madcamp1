@@ -9,8 +9,6 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.tab1.Tab1Fragment">
 
-
-
     <!-- 드롭다운 + 검색창 -->
     <LinearLayout
         android:id="@+id/search_bar_container"
@@ -40,7 +38,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-        
             android:hint="검색어 입력"
             android:padding="12dp"
             android:background="@drawable/search_box_bg"

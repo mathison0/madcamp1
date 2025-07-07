@@ -51,9 +51,9 @@ class ProblemListAdapter(
 
                 // 배경색 설정 - 번갈아 적용
                 val bgColor = if (position % 2 == 0)
-                    ContextCompat.getColor(holder.itemView.context, R.color.light_gray)
-                else
                     ContextCompat.getColor(holder.itemView.context, R.color.white)
+                else
+                    ContextCompat.getColor(holder.itemView.context, R.color.light_gray)
 
                 holder.itemView.setBackgroundColor(bgColor)
             }
@@ -70,11 +70,16 @@ class ProblemListAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(header: ProblemListItem.Header) {
             binding.textViewHeader.text = header.title
+
+
+            binding.textArrow.text = if (header.isExpanded) "▼" else "▶"
+
             binding.root.setOnClickListener {
-                onHeaderClick?.invoke(header)  // 클릭 시 콜백 호출
+                onHeaderClick?.invoke(header)
             }
         }
     }
+
 
     inner class ItemViewHolder(private val binding: ItemProblemBinding) :
         RecyclerView.ViewHolder(binding.root) {

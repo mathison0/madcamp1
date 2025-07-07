@@ -29,7 +29,7 @@ class Tab1Fragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private lateinit var fullList: List<ProblemListItem>
+    private lateinit var fullList: MutableList<ProblemListItem>
     private lateinit var adapter: ProblemListAdapter
 
     // JSON 로드 함수
@@ -58,23 +58,28 @@ class Tab1Fragment : Fragment() {
         _binding = FragmentTab1Binding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // 전체 리스트 초기화
-        fullList = loadProblemsFromJson(requireContext())
+        // 리스트 로드 후 isExpanded 설정
+        fullList = loadProblemsFromJson(requireContext()).toMutableList()
+        fullList.forEach {
+            if (it is ProblemListItem.Header) {
+                it.isExpanded = true
+            }
+        }
 
-        // 1. 어댑터 설정 시 클릭 리스너 전달
         adapter = ProblemListAdapter(
-            fullList,
+            items = emptyList(), // 초기엔 빈 리스트
             onProblemClickListener = { item ->
                 val action = Tab1FragmentDirections.actionNavigationTab1ToNavigationDetail(item.name, item.id)
                 findNavController().navigate(action)
             },
             onHeaderClick = { header ->
-                showProblemsUnderHeader(header)
+                toggleHeader(header)  // 여기서 토글 함수 호출
             }
         )
-
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
+
+        updateVisibleList() // 초기 표시 리스트 구성
 
         // 스피너 설정
         ArrayAdapter.createFromResource(
@@ -134,22 +139,49 @@ class Tab1Fragment : Fragment() {
         return root
     }
 
-    private fun showProblemsUnderHeader(selectedHeader: ProblemListItem.Header) {
-        val expandedList = mutableListOf<ProblemListItem>()
-        var inSection = false
+    private fun toggleHeader(header: ProblemListItem.Header) {
+        header.isExpanded = !header.isExpanded
+        updateVisibleList()
+    }
+
+    private fun updateVisibleList() {
+        val newList = mutableListOf<ProblemListItem>()
+        var currentHeader: ProblemListItem.Header? = null
+
         for (item in fullList) {
             when (item) {
                 is ProblemListItem.Header -> {
-                    inSection = item.title == selectedHeader.title
-                    if (inSection) expandedList.add(item)
+                    newList.add(item)
+                    currentHeader = item
                 }
                 is ProblemListItem.Item -> {
-                    if (inSection) expandedList.add(item)
+                    if (currentHeader?.isExpanded == true) {
+                        newList.add(item)
+                    }
                 }
             }
         }
-        adapter.updateList(expandedList)
+
+        adapter.updateList(newList)
+        Log.d("VisibleList", newList.joinToString("\n") { it.toString() })
     }
+
+//    private fun showProblemsUnderHeader(selectedHeader: ProblemListItem.Header) {
+//        val expandedList = mutableListOf<ProblemListItem>()
+//        var inSection = false
+//        for (item in fullList) {
+//            when (item) {
+//                is ProblemListItem.Header -> {
+//                    inSection = item.title == selectedHeader.title
+//                    if (inSection) expandedList.add(item)
+//                }
+//                is ProblemListItem.Item -> {
+//                    if (inSection) expandedList.add(item)
+//                }
+//            }
+//        }
+//        adapter.updateList(expandedList)
+//    }
 
 
     override fun onDestroyView() {
