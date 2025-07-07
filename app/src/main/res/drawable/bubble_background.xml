@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <!-- 말풍선 배경색 -->
-    <solid android:color="#FF6F00" /> <!-- 주황색 말풍선 -->
+    <solid android:color="#F9F9F9" /> <!-- 회색 말풍선 -->
 
     <!-- 둥근 테두리 -->
     <corners android:radius="16dp" />

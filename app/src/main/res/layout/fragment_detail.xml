@@ -1,74 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingTop="?attr/actionBarSize"
         android:fitsSystemWindows="true">
 
-        <!-- 상단 제목 + 버튼 + 체크박스 영역 -->
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical"
+            android:paddingTop="?attr/actionBarSize">
 
-            <!-- 문제 제목 -->
-            <TextView
-                android:id="@+id/textViewTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="문제 제목"
-                android:textSize="20sp"
-                android:textColor="#000000"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/checkBoxSolved"
-                app:layout_constraintHorizontal_bias="0" />
-
-            <!-- 풀이 연결 버튼-->
-            <Button
-                android:id="@+id/buttonSolution"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="236dp"
-                android:text="풀이 보기"
-                app:layout_constraintBottom_toBottomOf="@id/checkBoxSolved"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/checkBoxSolved"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <!-- 체크박스 -->
-            <CheckBox
-                android:id="@+id/checkBoxSolved"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toTopOf="@id/textViewTitle"
-                app:layout_constraintBottom_toBottomOf="@id/textViewTitle"
-                app:layout_constraintEnd_toEndOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!-- 이미지들 넣을 컨테이너 -->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:id="@+id/imageContainer"
+            <!-- 상단 제목 + 버튼 + 체크박스 영역 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp" />
-        </ScrollView>
+                android:padding="8dp">
+
+                <!-- 문제 제목 -->
+                <TextView
+                    android:id="@+id/textViewTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="문제 제목"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toStartOf="@id/checkBoxContainer"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- 풀이 연결 버튼-->
+
+                <LinearLayout
+                    android:id="@+id/checkBoxContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="352dp"
+                    android:layout_marginTop="36dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <!-- 날짜 텍스트 -->
+                    <TextView
+                        android:id="@+id/textCheckDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text=""
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+
+                    <!-- 체크박스 -->
+                    <com.example.madcamp1.ui.custom.NoToggleCheckBox
+                        android:id="@+id/checkBoxSolved"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/place_details_attribution_color_gray"
+                        android:text="" />
 
 
-    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/buttonSolution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="풀이 보기"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 이미지들 넣을 컨테이너 -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/imageContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textSolvedDateBubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bubble_background"
+            android:padding="8dp"
+            android:text="푼 날짜"
+            android:textColor="#0F0F0F"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

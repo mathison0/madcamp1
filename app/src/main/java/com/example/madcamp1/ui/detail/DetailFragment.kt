@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.example.madcamp1.databinding.FragmentDetailBinding
 import androidx.navigation.fragment.findNavController
 import android.widget.ImageView
+import com.example.madcamp1.ui.custom.NoToggleCheckBox
 import java.time.LocalDate
 import org.json.JSONArray
 
@@ -47,7 +48,7 @@ class DetailFragment : Fragment() {
         val prefs = requireContext().getSharedPreferences("checkbox_prefs", Context.MODE_PRIVATE)
         val key = "isChecked_$problemId"
 
-        val editor = prefs.edit()
+//        val editor = prefs.edit()
 
 ////       모든 isChecked_로 시작하는 키 제거
 //        for ((key, _) in prefs.all) {
@@ -62,30 +63,35 @@ class DetailFragment : Fragment() {
 ////      적용
 //        editor.apply()
 
+        // 1. SharedPreferences에서 체크 상태 및 날짜 불러오기
         val isChecked = prefs.getBoolean(key, false)
-        // 2. 체크박스 상태 설정
-        binding.checkBoxSolved.isChecked = isChecked
-        // 3. 이미 체크되어 있으면 다시 건드릴 수 없도록 비활성화
-        binding.checkBoxSolved.isEnabled = !isChecked
+        val dateKey = "checked_date_$problemId"
+        val savedDate = prefs.getString(dateKey, null)
 
-        binding.checkBoxSolved.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                prefs.edit().putBoolean(key, true).apply()
-                binding.checkBoxSolved.isEnabled = false
+        if (isChecked && savedDate != null) {
+            // ✅ 이미 체크됨 → 날짜 텍스트 표시 + 비활성화
+            binding.checkBoxSolved.text = savedDate
+            binding.checkBoxSolved.isChecked = true
+            binding.checkBoxSolved.isEnabled = false
+        } else {
+            // ✅ 아직 체크 안 된 경우 → 체크 시 처리
+            binding.checkBoxSolved.setOnCheckedChangeListener { _, isNowChecked ->
+                if (isNowChecked) {
+                    val today = LocalDate.now().toString()
 
-                // 오늘 날짜를 저장
-                val today = LocalDate.now().toString()
-                val jsonKey = "checked_date_list"
-                val existingJson = prefs.getString(jsonKey, "[]")
-                val jsonArray = JSONArray(existingJson)
+                    // 저장
+                    prefs.edit()
+                        .putBoolean(key, true)
+                        .putString(dateKey, today)
+                        .apply()
 
-                jsonArray.put(today)  // 중복 허용
-
-                prefs.edit().putString(jsonKey, jsonArray.toString()).apply()
-
-                Log.d("DetailFragment", "체크한 날짜 저장됨 (JSONArray): $today")
+                    // UI 갱신
+                    binding.checkBoxSolved.text = today
+                    binding.checkBoxSolved.isEnabled = false
+                }
             }
         }
+
 
         binding.buttonSolution.setOnClickListener {
 
