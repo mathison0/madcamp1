@@ -32,58 +32,35 @@
                     android:text="문제 제목"
                     android:textColor="#000000"
                     android:textSize="20sp"
-                    app:layout_constraintEnd_toStartOf="@id/checkBoxContainer"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- 풀이 연결 버튼-->
-
+                <!-- 버튼 + 체크박스 묶음 -->
                 <LinearLayout
-                    android:id="@+id/checkBoxContainer"
+                    android:id="@+id/buttonCheckRow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="352dp"
-                    android:layout_marginTop="36dp"
+                    android:layout_marginTop="8dp"
                     android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/textViewTitle"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_marginStart="16dp">
 
-                    <!-- 날짜 텍스트 -->
-                    <TextView
-                        android:id="@+id/textCheckDate"
+                    <Button
+                        android:id="@+id/buttonSolution"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text=""
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:visibility="gone" />
+                        android:text="풀이 보기" />
 
-                    <!-- 체크박스 -->
-
-
+                    <com.example.madcamp1.ui.custom.NoToggleCheckBox
+                        android:id="@+id/checkBoxSolved"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:buttonTint="@color/place_details_attribution_color_gray"
+                        android:text="" />
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/buttonSolution"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="풀이 보기"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="16dp"/>
-
-                <com.example.madcamp1.ui.custom.NoToggleCheckBox
-                    android:id="@+id/checkBoxSolved"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/place_details_attribution_color_gray"
-                    android:text=""
-                    tools:layout_editor_absoluteX="205dp"
-                    tools:layout_editor_absoluteY="40dp" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

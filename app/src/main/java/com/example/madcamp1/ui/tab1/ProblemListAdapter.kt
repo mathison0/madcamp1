@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp1.data.ProblemListItem
 import com.example.madcamp1.databinding.ItemHeaderBinding
 import com.example.madcamp1.databinding.ItemProblemBinding
+import androidx.core.content.ContextCompat
+import com.example.madcamp1.R
+
 
 class ProblemListAdapter(
     private var items: List<ProblemListItem>,
@@ -42,7 +45,18 @@ class ProblemListAdapter(
         Log.d("RecyclerView", "onBindViewHolder position=$position, item=${items[position]}")
         when (val item = items[position]) {
             is ProblemListItem.Header -> (holder as HeaderViewHolder).bind(item)
-            is ProblemListItem.Item -> (holder as ItemViewHolder).bind(item)
+            is ProblemListItem.Item -> {
+                val itemHolder = holder as ItemViewHolder
+                itemHolder.bind(item)
+
+                // 배경색 설정 - 번갈아 적용
+                val bgColor = if (position % 2 == 0)
+                    ContextCompat.getColor(holder.itemView.context, R.color.light_gray)
+                else
+                    ContextCompat.getColor(holder.itemView.context, R.color.white)
+
+                holder.itemView.setBackgroundColor(bgColor)
+            }
         }
     }
 

@@ -9,9 +9,9 @@
 
     <style name="Theme.Madcamp1" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/pastel_sky_blue1</item>
+        <item name="colorPrimaryVariant">@color/pastel_sky_blue2</item>
+        <item name="colorOnPrimary">#323232</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
