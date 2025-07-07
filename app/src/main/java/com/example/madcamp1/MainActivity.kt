@@ -22,16 +22,38 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+        navView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_tab1 -> {
+                    navController.popBackStack(R.id.navigation_tab1, false)
+                    navController.navigate(R.id.navigation_tab1)
+                    true
+                }
+                R.id.navigation_tab2 -> {
+                    navController.popBackStack(R.id.navigation_tab2, false)
+                    navController.navigate(R.id.navigation_tab2)
+                    true
+                }
+                R.id.navigation_tab3 -> {
+                    navController.popBackStack(R.id.navigation_tab3, false)
+                    navController.navigate(R.id.navigation_tab3)
+                    true
+                }
+                else -> false
+            }
+        }
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_tab1, R.id.navigation_tab2, R.id.navigation_tab3
+                R.id.navigation_tab1,
+                R.id.navigation_tab2,
+                R.id.navigation_tab3
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)

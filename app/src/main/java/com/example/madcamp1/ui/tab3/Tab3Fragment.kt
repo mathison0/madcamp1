@@ -1,5 +1,6 @@
 package com.example.madcamp1.ui.tab3
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -24,6 +25,7 @@ import java.time.YearMonth
 import java.time.DayOfWeek
 import java.time.format.TextStyle
 import java.util.Locale
+import org.json.JSONArray
 
 class Tab3Fragment : Fragment() {
 
@@ -97,10 +99,14 @@ class Tab3Fragment : Fragment() {
     }
 
     private fun generateDummyData() {
-        val today = LocalDate.now()
-        for (i in 0..30) {
-            val date = today.minusDays(i.toLong())
-            solvedCounts[date] = (0..4).random()
+        val prefs = requireContext().getSharedPreferences("checkbox_prefs", Context.MODE_PRIVATE)
+        val jsonString = prefs.getString("checked_date_list", "[]")
+        val jsonArray = JSONArray(jsonString)
+
+        solvedCounts.clear()
+        for (i in 0 until jsonArray.length()) {
+            val date = LocalDate.parse(jsonArray.getString(i))
+            solvedCounts[date] = (solvedCounts[date] ?: 0) + 1
         }
     }
 
