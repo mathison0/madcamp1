@@ -114,25 +114,4 @@ class Tab3Fragment : Fragment() {
         // Alternatively, you can add an ID to the container layout and use findViewById()
         val titlesContainer = view as ViewGroup
     }
-    /*
-    inner class DayViewHolder(private val view: View) {
-
-        private val dayText = view.findViewById<TextView>(R.id.tvDayText)
-
-        fun bind(day: CalendarDay) {
-            dayText.text = day.date.dayOfMonth.toString()
-
-            // 문제 푼 개수에 따른 색 지정
-            val count = solvedCounts[day.date] ?: 0
-            val color = when {
-                count >= 4 -> Color.parseColor("#33691E") // 진초록
-                count == 3 -> Color.parseColor("#558B2F")
-                count == 2 -> Color.parseColor("#7CB342")
-                count == 1 -> Color.parseColor("#AED581") // 연초록
-                else -> Color.LTGRAY // 0개
-            }
-            dayText.setBackgroundColor(color)
-        }
-    }
-    */
 }
