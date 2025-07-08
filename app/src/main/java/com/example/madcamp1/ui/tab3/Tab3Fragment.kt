@@ -46,7 +46,7 @@ class Tab3Fragment : Fragment() {
         LocalDate.now().minusDays(1) to 1,
         LocalDate.now().minusDays(3) to 2,
         LocalDate.now().minusDays(4) to 3,
-        LocalDate.now().minusDays(5) to 5
+        LocalDate.now().minusDays(5) to 4
     )
 
     // 현재 월
@@ -138,6 +138,10 @@ class Tab3Fragment : Fragment() {
         for (i in 0 until jsonArray.length()) {
             val date = LocalDate.parse(jsonArray.getString(i))
             solvedCounts[date] = (solvedCounts[date] ?: 0) + 1
+        }
+        // 시연용 데이터 추가
+        for ((date, count) in fakeSubmissionMap) {
+            solvedCounts[date] = (solvedCounts[date] ?: 0) + count
         }
     }
 

@@ -118,9 +118,11 @@ class Tab1Fragment : Fragment() {
                             result.addAll(
                                 fullList.filter {
                                     it is ProblemListItem.Header && it.title.contains(query, ignoreCase = true)
+                                }.onEach {
+                                    (it as ProblemListItem.Header).isExpanded = false
                                 }
                             )
-                        }
+                            }
                     }
                 }
                 adapter.updateList(result)
@@ -129,7 +131,8 @@ class Tab1Fragment : Fragment() {
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
+        }
+        )
 
         adapter.updateList(fullList)
         Log.d("Tab1Fragment", "초기 리스트 크기: ${fullList.size}")
@@ -145,7 +148,11 @@ class Tab1Fragment : Fragment() {
     }
 
     private fun toggleHeader(header: ProblemListItem.Header) {
-        header.isExpanded = !header.isExpanded
+        fullList.forEach {
+            if (it is ProblemListItem.Header) {
+                it.isExpanded = it == header && !it.isExpanded
+            }
+        }
         updateVisibleList()
     }
 
