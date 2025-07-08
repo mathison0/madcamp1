@@ -51,9 +51,9 @@ class ProblemListAdapter(
 
                 // 배경색 설정 - 번갈아 적용
                 val bgColor = if (position % 2 == 0)
-                    ContextCompat.getColor(holder.itemView.context, R.color.white)
-                else
                     ContextCompat.getColor(holder.itemView.context, R.color.light_gray)
+                else
+                    ContextCompat.getColor(holder.itemView.context, R.color.white)
 
                 holder.itemView.setBackgroundColor(bgColor)
             }
