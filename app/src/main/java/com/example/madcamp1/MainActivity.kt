@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_tab3 -> navView.menu.findItem(R.id.navigation_tab3).isChecked = true
                 R.id.contestDetailFragment -> navView.menu.findItem(R.id.navigation_tab2).isChecked = true
                 R.id.problemDetailFragment -> navView.menu.findItem(R.id.navigation_tab2).isChecked = true
+                R.id.navigation_detail -> navView.menu.findItem(R.id.navigation_tab1).isChecked = true
             }
         }
 
