@@ -15,5 +15,9 @@
     <color name="mid_green">#7CB342</color>
     <color name="dark_green">#558B2F</color>
     <color name="deep_green">#33691E</color>
+    <color name="color_chip1">#7df7ff</color>
+    <color name="color_chip2">#95caff</color>
+    <color name="color_chip3">#c38dee</color>
+    <color name="color_chip4">#fd7dab</color>
 
 </resources>

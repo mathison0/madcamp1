@@ -28,6 +28,10 @@ import java.time.DayOfWeek
 import java.time.format.TextStyle
 import java.util.Locale
 import org.json.JSONArray
+import androidx.core.content.ContextCompat
+import com.example.madcamp1.R
+
+
 
 class Tab3Fragment : Fragment() {
 
@@ -67,10 +71,10 @@ class Tab3Fragment : Fragment() {
                 }
 
                 val color = when (level) {
-                    4 -> Color.parseColor("#33691E")
-                    3 -> Color.parseColor("#558B2F")
-                    2 -> Color.parseColor("#7CB342")
-                    1 -> Color.parseColor("#AED581")
+                    4 -> ContextCompat.getColor(requireContext(), R.color.color_chip4)
+                    3 -> ContextCompat.getColor(requireContext(), R.color.color_chip3)
+                    2 -> ContextCompat.getColor(requireContext(), R.color.color_chip2)
+                    1 -> ContextCompat.getColor(requireContext(), R.color.color_chip1)
                     else -> Color.LTGRAY
                 }
 

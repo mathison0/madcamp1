@@ -28,12 +28,28 @@ class ProblemDetailFragment : Fragment() {
         for (resId in images) {
             val photoView = PhotoView(requireContext()).apply {
                 layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, 600
-                ).apply { setMargins(0, 16, 0, 16) }
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+                )
+
                 scaleType = ImageView.ScaleType.FIT_CENTER
+                load(resId)
             }
-            photoView.load(resId)
-            binding.imageContainer.addView(photoView)
+
+            val cardView = androidx.cardview.widget.CardView(requireContext()).apply {
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, 600
+                ).apply {
+                    setMargins(0, 16, 0, 16)
+                }
+
+                radius = 8f               // 테두리 둥글기
+                cardElevation = 4f         // 그림자 깊이
+                setContentPadding(8, 8, 8, 8)
+                useCompatPadding = true    // 그림자 패딩 보정
+                addView(photoView)
+            }
+
+            binding.imageContainer.addView(cardView)
         }
     }
 
