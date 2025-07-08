@@ -8,6 +8,6 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:padding="12dp"
-        android:textColor="#333333"
+        android:textColor="#666666"
         android:background="#EEEEEE" />
 </layout>

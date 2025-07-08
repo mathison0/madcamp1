@@ -82,14 +82,10 @@ class Tab1Fragment : Fragment() {
         updateVisibleList() // 초기 표시 리스트 구성
 
         // 스피너 설정
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.search_filter_options,
-            android.R.layout.simple_spinner_item
-        ).also { spinnerAdapter ->
-            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.spinnerFilter.adapter = spinnerAdapter
-        }
+        val items = listOf("문제", "대회")
+        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, items)
+        spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        binding.spinnerFilter.adapter = spinnerAdapter
 
         // 검색 기능
         binding.editSearch.addTextChangedListener(object : TextWatcher {
@@ -174,24 +170,6 @@ class Tab1Fragment : Fragment() {
         adapter.updateList(newList)
         Log.d("VisibleList", newList.joinToString("\n") { it.toString() })
     }
-
-//    private fun showProblemsUnderHeader(selectedHeader: ProblemListItem.Header) {
-//        val expandedList = mutableListOf<ProblemListItem>()
-//        var inSection = false
-//        for (item in fullList) {
-//            when (item) {
-//                is ProblemListItem.Header -> {
-//                    inSection = item.title == selectedHeader.title
-//                    if (inSection) expandedList.add(item)
-//                }
-//                is ProblemListItem.Item -> {
-//                    if (inSection) expandedList.add(item)
-//                }
-//            }
-//        }
-//        adapter.updateList(expandedList)
-//    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
