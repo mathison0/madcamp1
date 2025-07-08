@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.madcamp1.databinding.FragmentProblemDetailBinding
+import com.github.chrisbanes.photoview.PhotoView
 
 class ProblemDetailFragment : Fragment() {
     private var _binding: FragmentProblemDetailBinding? = null
@@ -25,14 +26,14 @@ class ProblemDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val images = arguments?.getIntArray("images") ?: return
         for (resId in images) {
-            val imageView = ImageView(requireContext()).apply {
+            val photoView = PhotoView(requireContext()).apply {
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, 600
                 ).apply { setMargins(0, 16, 0, 16) }
                 scaleType = ImageView.ScaleType.FIT_CENTER
             }
-            imageView.load(resId)
-            binding.imageContainer.addView(imageView)
+            photoView.load(resId)
+            binding.imageContainer.addView(photoView)
         }
     }
 

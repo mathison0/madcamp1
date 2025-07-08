@@ -25,6 +25,14 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_tab1 -> navView.menu.findItem(R.id.navigation_tab1).isChecked = true
+                R.id.navigation_tab2 -> navView.menu.findItem(R.id.navigation_tab2).isChecked = true
+                R.id.navigation_tab3 -> navView.menu.findItem(R.id.navigation_tab3).isChecked = true
+            }
+        }
+
         navView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_tab1 -> {
