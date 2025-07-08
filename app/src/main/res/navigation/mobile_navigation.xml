@@ -40,7 +40,6 @@
     <fragment
         android:id="@+id/contestDetailFragment"
         android:name="com.example.madcamp1.ui.tab2.ContestDetailFragment"
-        android:label="대회 상세"
         tools:layout="@layout/fragment_contest_detail">
 
         <!-- argument: contestTitle -->
@@ -59,7 +58,6 @@
     <fragment
         android:id="@+id/problemDetailFragment"
         android:name="com.example.madcamp1.ui.tab2.ProblemDetailFragment"
-        android:label="문제 상세 화면"
         tools:layout="@layout/fragment_problem_detail">
 
         <argument

@@ -6,7 +6,22 @@
     android:id="@+id/contestDetailLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.tab2.ContestDetailFragment">
+
+<!--    <TextView-->
+<!--        android:id="@+id/textViewContestTitle"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="대회명"-->
+<!--        android:textSize="24sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:textColor="#000000"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -14,11 +29,11 @@
         android:layout_height="0dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="65dp"
         android:paddingBottom="80dp"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_album"
+        android:paddingTop="25dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

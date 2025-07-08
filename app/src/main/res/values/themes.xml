@@ -8,6 +8,9 @@
     </style>
 
     <style name="Theme.Madcamp1" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/pastel_sky_blue1</item>
         <item name="colorPrimaryVariant">@color/pastel_sky_blue2</item>
