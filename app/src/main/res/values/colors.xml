@@ -11,5 +11,9 @@
     <color name="pastel_sky_blue3">#767676</color>
     <color name="pastel_sky_blue2">#5BA7C1</color>
     <color name="light_gray">#F5F5F5</color>
+    <color name="light_green">#AED581</color>
+    <color name="mid_green">#7CB342</color>
+    <color name="dark_green">#558B2F</color>
+    <color name="deep_green">#33691E</color>
 
 </resources>
