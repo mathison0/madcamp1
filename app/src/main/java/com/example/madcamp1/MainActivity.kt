@@ -1,6 +1,7 @@
 package com.example.madcamp1
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -29,10 +30,13 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            Log.d("NavDebug", "Destination changed to: ${destination.id} (${resources.getResourceEntryName(destination.id)})")
             when (destination.id) {
                 R.id.navigation_tab1 -> navView.menu.findItem(R.id.navigation_tab1).isChecked = true
                 R.id.navigation_tab2 -> navView.menu.findItem(R.id.navigation_tab2).isChecked = true
                 R.id.navigation_tab3 -> navView.menu.findItem(R.id.navigation_tab3).isChecked = true
+                R.id.contestDetailFragment -> navView.menu.findItem(R.id.navigation_tab2).isChecked = true
+                R.id.problemDetailFragment -> navView.menu.findItem(R.id.navigation_tab2).isChecked = true
             }
         }
 
