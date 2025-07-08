@@ -97,7 +97,7 @@ class Tab1Fragment : Fragment() {
                 val query = s.toString().trim()
                 val selectedOption = binding.spinnerFilter.selectedItem.toString()
 
-                val result = mutableListOf<ProblemListItem>()
+                var result = mutableListOf<ProblemListItem>()
                 if (query.isBlank()) {
                     result.addAll(fullList)
                 } else {
@@ -108,6 +108,15 @@ class Tab1Fragment : Fragment() {
                                     it is ProblemListItem.Item && it.name.contains(query, ignoreCase = true)
                                 }
                             )
+                            result = result.map { item ->
+                                when (item) {
+                                    is ProblemListItem.Item -> item.copy(
+                                        name = item.name.substringAfter(" - ", item.name)
+                                    )
+                                    is ProblemListItem.Header -> item  // Header는 그대로
+                                }
+                            }.toMutableList()
+
                         }
                         "대회" -> {
                             result.addAll(
