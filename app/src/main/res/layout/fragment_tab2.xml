@@ -14,7 +14,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="65dp"
-        android:paddingBottom="80dp"
+        android:paddingBottom="60dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_contest_album"
         app:layout_constraintTop_toTopOf="parent"
