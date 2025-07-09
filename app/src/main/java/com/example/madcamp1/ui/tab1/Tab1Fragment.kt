@@ -19,6 +19,7 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.core.view.ViewCompat
 import com.example.madcamp1.R
+import android.widget.AdapterView
 
 
 class Tab1Fragment : Fragment() {
@@ -31,6 +32,51 @@ class Tab1Fragment : Fragment() {
 
     private lateinit var fullList: MutableList<ProblemListItem>
     private lateinit var adapter: ProblemListAdapter
+    private fun filterList(query: String) {
+        val selectedOption = binding.spinnerFilter.selectedItem.toString()
+
+        var result = mutableListOf<ProblemListItem>()
+        if (query.isBlank()) {
+            fullList.forEach {
+                if (it is ProblemListItem.Header) {
+                    it.isExpanded = true
+                }
+            }
+            updateVisibleList()
+            return
+        } else {
+            when (selectedOption) {
+                "문제" -> {
+                    result.addAll(
+                        fullList.filter {
+                            it is ProblemListItem.Item && it.name.contains(query, ignoreCase = true)
+                        }
+                    )
+                    result = result.map { item ->
+                        when (item) {
+                            is ProblemListItem.Item -> item.copy(
+                                name = item.name.substringAfter(" - ", item.name)
+                            )
+                            is ProblemListItem.Header -> item
+                        }
+                    }.toMutableList()
+                }
+                "대회" -> {
+                    result.addAll(
+                        fullList.filter {
+                            it is ProblemListItem.Header && it.title.contains(query, ignoreCase = true)
+                        }.onEach {
+                            (it as ProblemListItem.Header).isExpanded = false
+                        }
+                    )
+                }
+            }
+            adapter.updateList(result)
+            Log.d("Tab1Fragment", "업데이트 리스트 크기: ${result.size}")
+        }
+    }
+
+
 
     // JSON 로드 함수
     private fun loadProblemsFromJson(context: Context): List<ProblemListItem> {
@@ -96,59 +142,26 @@ class Tab1Fragment : Fragment() {
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
         binding.spinnerFilter.adapter = spinnerAdapter
 
+        binding.spinnerFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val query = binding.editSearch.text.toString().trim()
+                filterList(query) // 현재 입력된 검색어로 다시 필터링
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+
         // 검색 기능
+        // EditText 변경 감지
         binding.editSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val query = s.toString().trim()
-                val selectedOption = binding.spinnerFilter.selectedItem.toString()
-
-                var result = mutableListOf<ProblemListItem>()
-                if (query.isBlank()) {
-                    fullList.forEach {
-                        if (it is ProblemListItem.Header) {
-                            it.isExpanded = true
-                        }
-                    }
-                    updateVisibleList()
-                    return
-                } else {
-                    when (selectedOption) {
-                        "문제" -> {
-                            result.addAll(
-                                fullList.filter {
-                                    it is ProblemListItem.Item && it.name.contains(query, ignoreCase = true)
-                                }
-                            )
-                            result = result.map { item ->
-                                when (item) {
-                                    is ProblemListItem.Item -> item.copy(
-                                        name = item.name.substringAfter(" - ", item.name)
-                                    )
-                                    is ProblemListItem.Header -> item  // Header는 그대로
-                                }
-                            }.toMutableList()
-
-                        }
-                        "대회" -> {
-                            result.addAll(
-                                fullList.filter {
-                                    it is ProblemListItem.Header && it.title.contains(query, ignoreCase = true)
-                                }.onEach {
-                                    (it as ProblemListItem.Header).isExpanded = false
-                                }
-                            )
-                            }
-                    }
-                }
-                adapter.updateList(result)
-                Log.d("Tab1Fragment", "업데이트 리스트 크기: ${result.size}")
+                filterList(query)
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        }
-        )
-
+        })
         adapter.updateList(fullList)
         Log.d("Tab1Fragment", "초기 리스트 크기: ${fullList.size}")
 
