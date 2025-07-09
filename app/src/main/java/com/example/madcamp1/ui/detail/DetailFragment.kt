@@ -1,5 +1,6 @@
 package com.example.madcamp1.ui.detail
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -74,27 +75,32 @@ class DetailFragment : Fragment() {
             binding.checkBoxSolved.isChecked = true
             binding.checkBoxSolved.isEnabled = false
         } else {
-            // ✅ 아직 체크 안 된 경우 → 체크 시 처리
-            binding.checkBoxSolved.setOnCheckedChangeListener { _, isNowChecked ->
-                if (isNowChecked) {
-                    val today = LocalDate.now().toString()
+            binding.checkBoxSolved.setOnClickListener {
+                // 체크박스가 체크되어 있는 상태면 해제 불가라서 무조건 다이얼로그 띄우기
+                AlertDialog.Builder(context)
+                    .setTitle("문제 풀이 확인")
+                    .setMessage("체크박스를 누르면 문제를 푼 것으로 처리되며, 다시 해제할 수 없습니다. 체크하시겠습니까?")
+                    .setPositiveButton("확인") { _, _ ->
+                        val today = LocalDate.now().toString()
 
-                    val dateListKey = "checked_date_list"
-                    val jsonString = prefs.getString(dateListKey, "[]")
-                    val jsonArray = JSONArray(jsonString)
-                    jsonArray.put(today)
+                        val dateListKey = "checked_date_list"
+                        val jsonString = prefs.getString(dateListKey, "[]")
+                        val jsonArray = JSONArray(jsonString)
+                        jsonArray.put(today)
 
-                    // 저장
-                    prefs.edit()
-                        .putBoolean(key, true)
-                        .putString(dateKey, today)
-                        .putString(dateListKey, jsonArray.toString())
-                        .apply()
+                        prefs.edit()
+                            .putBoolean(key, true)
+                            .putString(dateKey, today)
+                            .putString(dateListKey, jsonArray.toString())
+                            .apply()
 
-                    // UI 갱신
-                    binding.checkBoxSolved.text = today
-                    binding.checkBoxSolved.isEnabled = false
-                }
+                        binding.checkBoxSolved.text = today
+                        binding.checkBoxSolved.isEnabled = false
+                    }
+                    .setNegativeButton("취소") { _, _ ->
+                        binding.checkBoxSolved.isChecked = false
+                    }
+                    .show()
             }
         }
 
