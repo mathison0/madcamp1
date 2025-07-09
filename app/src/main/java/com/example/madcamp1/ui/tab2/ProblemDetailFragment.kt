@@ -1,14 +1,18 @@
 package com.example.madcamp1.ui.tab2
 
+import android.util.Log
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.example.madcamp1.R
 import com.example.madcamp1.databinding.FragmentProblemDetailBinding
 import com.github.chrisbanes.photoview.PhotoView
 
@@ -25,6 +29,9 @@ class ProblemDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val images = arguments?.getIntArray("images") ?: return
+        val toolbar = (activity as AppCompatActivity).findViewById<Toolbar>(R.id.toolbar)
+        toolbar.title = "풀이"
+        Log.d("ToolbarDebug", "hihi");
         for (resId in images) {
             val photoView = PhotoView(requireContext()).apply {
                 layoutParams = LinearLayout.LayoutParams(
