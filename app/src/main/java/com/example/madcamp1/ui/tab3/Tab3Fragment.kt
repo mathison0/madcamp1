@@ -41,13 +41,13 @@ class Tab3Fragment : Fragment() {
     // 날짜별 문제 푼 개수 (더미 데이터)
     private val solvedCounts = mutableMapOf<LocalDate, Int>()
 
-    // 시연용 더미 데이터
-    private val fakeSubmissionMap = mapOf(
-        LocalDate.now().minusDays(1) to 1,
-        LocalDate.now().minusDays(3) to 2,
-        LocalDate.now().minusDays(4) to 3,
-        LocalDate.now().minusDays(5) to 4
-    )
+//    // 시연용 더미 데이터
+//    private val fakeSubmissionMap = mapOf(
+//        LocalDate.now().minusDays(1) to 1,
+//        LocalDate.now().minusDays(3) to 2,
+//        LocalDate.now().minusDays(4) to 3,
+//        LocalDate.now().minusDays(5) to 4
+//    )
 
     // 현재 월
     private var currentMonth = YearMonth.now()
@@ -139,10 +139,10 @@ class Tab3Fragment : Fragment() {
             val date = LocalDate.parse(jsonArray.getString(i))
             solvedCounts[date] = (solvedCounts[date] ?: 0) + 1
         }
-        // 시연용 데이터 추가
-        for ((date, count) in fakeSubmissionMap) {
-            solvedCounts[date] = (solvedCounts[date] ?: 0) + count
-        }
+//        // 시연용 데이터 추가
+//        for ((date, count) in fakeSubmissionMap) {
+//            solvedCounts[date] = (solvedCounts[date] ?: 0) + count
+//        }
     }
 
 
