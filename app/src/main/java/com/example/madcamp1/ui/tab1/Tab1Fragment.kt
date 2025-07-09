@@ -73,7 +73,16 @@ class Tab1Fragment : Fragment() {
                 findNavController().navigate(action)
             },
             onHeaderClick = { header ->
-                toggleHeader(header)  // 여기서 토글 함수 호출
+                val query = binding.editSearch.text.toString().trim()
+                val selectedOption = binding.spinnerFilter.selectedItem.toString()
+
+                val isSearching = query.isNotBlank() && selectedOption == "대회"
+
+                if (isSearching) {
+                    toggleHeaderSearchMode(header)
+                } else {
+                    toggleHeaderNormalMode(header)
+                }
             }
         )
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -95,7 +104,13 @@ class Tab1Fragment : Fragment() {
 
                 var result = mutableListOf<ProblemListItem>()
                 if (query.isBlank()) {
-                    result.addAll(fullList)
+                    fullList.forEach {
+                        if (it is ProblemListItem.Header) {
+                            it.isExpanded = true
+                        }
+                    }
+                    updateVisibleList()
+                    return
                 } else {
                     when (selectedOption) {
                         "문제" -> {
@@ -147,7 +162,7 @@ class Tab1Fragment : Fragment() {
         return root
     }
 
-    private fun toggleHeader(header: ProblemListItem.Header) {
+    private fun toggleHeaderSearchMode(header: ProblemListItem.Header) {
         fullList.forEach {
             if (it is ProblemListItem.Header) {
                 it.isExpanded = it == header && !it.isExpanded
@@ -155,6 +170,12 @@ class Tab1Fragment : Fragment() {
         }
         updateVisibleList()
     }
+
+    private fun toggleHeaderNormalMode(header: ProblemListItem.Header) {
+        header.isExpanded = !header.isExpanded
+        updateVisibleList()
+    }
+
 
     private fun updateVisibleList() {
         val newList = mutableListOf<ProblemListItem>()
