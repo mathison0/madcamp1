@@ -63,6 +63,7 @@ dependencies {
 
     implementation("com.google.dagger:dagger-compiler:2.51.1")
     implementation(libs.androidx.media3.common.ktx)
+    implementation(libs.androidx.ui.graphics.android)
     ksp("com.google.dagger:dagger-compiler:2.51.1")
     implementation("io.coil-kt:coil:2.4.0")
     implementation("com.github.chrisbanes:PhotoView:2.3.0")

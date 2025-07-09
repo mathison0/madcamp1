@@ -14,9 +14,14 @@ import androidx.fragment.app.Fragment
 import com.example.madcamp1.databinding.FragmentDetailBinding
 import androidx.navigation.fragment.findNavController
 import android.widget.ImageView
+import android.widget.TextView
+import android.graphics.Color
+import androidx.core.content.ContextCompat
+import com.example.madcamp1.R
 import com.example.madcamp1.ui.custom.NoToggleCheckBox
 import java.time.LocalDate
 import org.json.JSONArray
+
 
 
 
@@ -77,7 +82,7 @@ class DetailFragment : Fragment() {
         } else {
             binding.checkBoxSolved.setOnClickListener {
                 // 체크박스가 체크되어 있는 상태면 해제 불가라서 무조건 다이얼로그 띄우기
-                AlertDialog.Builder(context)
+                val dialog = AlertDialog.Builder(context)
                     .setTitle("문제 풀이 확인")
                     .setMessage("체크박스를 누르면 문제를 푼 것으로 처리되며, 다시 해제할 수 없습니다. 체크하시겠습니까?")
                     .setPositiveButton("확인") { _, _ ->
@@ -100,7 +105,18 @@ class DetailFragment : Fragment() {
                     .setNegativeButton("취소") { _, _ ->
                         binding.checkBoxSolved.isChecked = false
                     }
-                    .show()
+                    .create()
+
+                dialog.window?.setBackgroundDrawable(
+                    ContextCompat.getDrawable(requireContext(), R.drawable.rounded_dialog_background)
+                )
+
+                    dialog.show()
+
+                val titleView = dialog.findViewById<TextView>(android.R.id.title)
+                val messageView = dialog.findViewById<TextView>(android.R.id.message)
+                titleView?.setTextColor(Color.parseColor("#555555"))
+                messageView?.setTextColor(Color.parseColor("#666666"))
             }
         }
 
