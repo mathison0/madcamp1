@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">madcamp1</string>
+    <string name="app_name">BOJ Manager</string>
     <string name="title_tab1">문제집</string>
     <string name="title_tab2">풀이</string>
     <string name="title_tab3">스트릭</string>
