@@ -1,1 +1,1 @@
-# madcamp1
+# BOJ Manager
